@@ -3,6 +3,7 @@ import {
   ArrowRight, Bookmark, CalendarDays, Check, ChevronDown, Copy, Download,
   ExternalLink, Filter, MapPin, PanelLeftClose, PanelLeftOpen, Search, SlidersHorizontal, X,
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import MapView from './MapView.jsx';
 import { accessLabel, allEvents, categories, categoryLabel, dates } from './events.js';
 import { eventsInPlan, planIdsFromUrl, planImageDataUrl, planUrl, xIntentUrl } from './share.js';
@@ -244,6 +245,7 @@ export default function App() {
           <div className="image-dialog__actions"><a href={planImage} download="my-sf-tech-week-plan.png"><Download size={15} /> Download PNG</a><a href={xUrl} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">𝕏</span> Post on X <ArrowRight size={14} /></a></div>
         </div>
       </div>}
+      <Analytics />
     </div>
   );
 }
