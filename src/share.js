@@ -1,3 +1,5 @@
+import { planCardSvg } from './card-art.js';
+
 const POST_INTRO = "I'm visiting SF Tech Week. Here's my event plan:";
 
 export function planIdsFromUrl(href) {
@@ -45,77 +47,20 @@ export function xIntentUrl(events, shareUrl) {
   return url.toString();
 }
 
-function fitText(context, value, maxWidth) {
-  if (context.measureText(value).width <= maxWidth) return value;
-  let text = value;
-  while (text.length > 1 && context.measureText(`${text}…`).width > maxWidth) text = text.slice(0, -1);
-  return `${text.trimEnd()}…`;
-}
-
-export function planImageDataUrl(events) {
+export async function planImageDataUrl(events) {
   const canvas = document.createElement('canvas');
   canvas.width = 1200;
-  canvas.height = 675;
+  canvas.height = 630;
   const context = canvas.getContext('2d');
   if (!context) throw new Error('Canvas is unavailable');
-
-  context.fillStyle = '#141414';
-  context.fillRect(0, 0, 1200, 675);
-  context.strokeStyle = '#454545';
-  context.lineWidth = 2;
-  context.strokeRect(32, 32, 1136, 611);
-
-  context.fillStyle = '#d8d8d8';
-  context.font = '500 22px "DM Mono", monospace';
-  context.fillText('SF TECH WEEK MAP  /  OCT 2026', 76, 88);
-  context.fillStyle = '#f4f4f4';
-  context.font = '700 64px "DM Sans", sans-serif';
-  context.fillText('My Tech Week plan', 76, 169);
-  context.fillStyle = '#a9a9a9';
-  context.font = '400 24px "DM Sans", sans-serif';
-  context.fillText(`${events.length} ${events.length === 1 ? 'event' : 'events'} worth showing up for`, 78, 210);
-
-  const shown = events.slice(0, 5);
-  shown.forEach((event, index) => {
-    const y = 278 + index * 69;
-    context.strokeStyle = '#383838';
-    context.beginPath();
-    context.moveTo(76, y - 25);
-    context.lineTo(1124, y - 25);
-    context.stroke();
-    context.fillStyle = '#bcbcbc';
-    context.font = '500 21px "DM Mono", monospace';
-    context.fillText(event.dateText.toUpperCase(), 78, y + 8);
-    context.fillStyle = '#f4f4f4';
-    context.font = '600 30px "DM Sans", sans-serif';
-    context.fillText(fitText(context, event.name, 800), 300, y + 10);
-  });
-
-  if (events.length > shown.length) {
-    context.fillStyle = '#bcbcbc';
-    context.font = '500 22px "DM Mono", monospace';
-    context.fillText(`+ ${events.length - shown.length} more events on my map`, 78, 594);
+  const blobUrl = URL.createObjectURL(new Blob([planCardSvg(events)], { type: 'image/svg+xml' }));
+  try {
+    const image = new Image();
+    image.src = blobUrl;
+    await image.decode();
+    context.drawImage(image, 0, 0);
+  } finally {
+    URL.revokeObjectURL(blobUrl);
   }
-  context.fillStyle = '#ededed';
-  for (const [x, y, height] of [[78, 610, 18], [90, 604, 24], [102, 610, 18]]) {
-    context.beginPath();
-    context.moveTo(x + 3, y);
-    context.lineTo(x + 5, y);
-    context.quadraticCurveTo(x + 8, y, x + 8, y + 3);
-    context.lineTo(x + 8, y + height - 3);
-    context.quadraticCurveTo(x + 8, y + height, x + 5, y + height);
-    context.lineTo(x + 3, y + height);
-    context.quadraticCurveTo(x, y + height, x, y + height - 3);
-    context.lineTo(x, y + 3);
-    context.quadraticCurveTo(x, y, x + 3, y);
-    context.fill();
-  }
-  context.font = '500 21px "DM Mono", monospace';
-  context.fillText('Built with Alan AI', 126, 628);
-  context.fillStyle = '#e2e2e2';
-  context.font = '500 21px "DM Mono", monospace';
-  context.textAlign = 'right';
-  context.fillText('sftechweekmap.com', 1120, 628);
-
   return canvas.toDataURL('image/png');
 }

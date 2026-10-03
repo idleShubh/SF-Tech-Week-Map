@@ -29,8 +29,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .app-shell { height: 100dvh; min-height: 600px; overflow: hidden; background: #141414; }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: 17px; font-weight: 700; letter-spacing: -.035em; white-space: nowrap; }
-.brand__mark { color: var(--accent); display: flex; transform: translateY(1px); }
-.brand__mark svg { stroke: #141414; }
+.brand__mark { display: flex; align-items: center; }
+.brand__mark img { display: block; width: 25px; height: 25px; }
 .plan-button { position: fixed; z-index: 750; top: 16px; right: 18px; display: inline-flex; align-items: center; gap: 9px; height: 38px; padding: 0 8px 0 13px; border: 1px solid #777; border-radius: 7px; box-shadow: 0 8px 24px #0008; color: var(--text); background: #1c1c1c; font-size: 12px; font-weight: 600; transition: border-color .2s, background .2s; }
 .plan-button:hover, .plan-button--active { border-color: var(--accent); background: #262626; }
 .plan-button__count { display: grid; place-items: center; min-width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #1c1c1c; font: 700 11px var(--mono); }
@@ -197,7 +197,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .app-shell { min-height: 100dvh; height: auto; overflow: visible; }
   .sidebar__header { order: 1; min-height: 59px; padding: 0 172px 0 15px; position: relative; }
   .brand { font-size: 15px; gap: 7px; }
-  .brand__mark svg { width: 17px; }
+  .brand__mark img { width: 23px; height: 23px; }
   .panel-toggle { position: absolute; top: 12px; right: 129px; }
   .plan-button { top: 12px; right: 14px; height: 35px; padding: 0 6px 0 9px; font-size: 11px; gap: 6px; }
   .plan-button svg { width: 14px; }

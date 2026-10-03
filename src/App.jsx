@@ -162,9 +162,9 @@ export default function App() {
     }
   }
 
-  function showPlanImage() {
+  async function showPlanImage() {
     setShareError('');
-    try { setPlanImage(planImageDataUrl(plannedEvents)); }
+    try { setPlanImage(await planImageDataUrl(plannedEvents)); }
     catch { setShareError('Could not create the image. Please try again.'); }
   }
 
@@ -175,7 +175,7 @@ export default function App() {
       <main className="workspace">
         <section className="sidebar" aria-label="Explore events">
           <div className="sidebar__header">
-            <a className="brand" href="/" onClick={(event) => { event.preventDefault(); showExplore(); }} aria-label="SF Tech Week Map home"><span className="brand__mark"><MapPin size={19} fill="currentColor" strokeWidth={2.1} /></span><span>SF Tech Week Map</span></a>
+            <a className="brand" href="/" onClick={(event) => { event.preventDefault(); showExplore(); }} aria-label="SF Tech Week Map home"><span className="brand__mark"><img src="/favicon.svg" alt="" width="25" height="25" /></span><span>SF Tech Week Map</span></a>
             <button className="panel-toggle" onClick={() => setPanelCollapsed(true)} aria-label="Hide event panel to enlarge map" title="Enlarge map"><PanelLeftClose size={19} /></button>
           </div>
           <div className="sidebar__intro">
