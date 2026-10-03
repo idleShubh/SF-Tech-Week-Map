@@ -210,10 +210,9 @@ export default function App() {
             <div className="plan-share__heading"><span>YOUR PLAN IS READY</span><span>{plannedEvents.length} SAVED</span></div>
             <p>Let people know where to find you. Your link opens this exact plan.</p>
             <div className="plan-share__actions">
-              <a className="plan-share__x" href={xUrl} target="_blank" rel="noopener noreferrer" aria-label="Post my event plan on X"><span aria-hidden="true">𝕏</span> Post on X <ArrowRight size={14} /></a>
+              <button className="plan-share__x" onClick={showPlanImage} aria-label="Preview my plan image before posting on X"><span aria-hidden="true">𝕏</span> Post on X <ArrowRight size={14} /></button>
               <button className="plan-share__copy" onClick={sharePlan}>{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? 'Copied' : 'Copy link'}</button>
             </div>
-            <button className="plan-share__image" onClick={showPlanImage}><Download size={14} /> Preview & save your plan image</button>
             {shareError && <p className="plan-share__error" role="alert">{shareError}</p>}
           </div>}
 
@@ -240,7 +239,7 @@ export default function App() {
         <div className="image-dialog" role="dialog" aria-modal="true" aria-label="Your plan image">
           <div className="image-dialog__top"><div><span>READY TO SHARE</span><h2>Your plan, as an image</h2></div><button className="icon-button" onClick={() => setPlanImage(null)} aria-label="Close image preview"><X size={17} /></button></div>
           <img src={planImage} alt={`Share image with ${plannedEvents.length} saved Tech Week events`} />
-          <p>Download this image and attach it in X if you want your exact picks in the post.</p>
+          <p>Download the image, then open X and attach it to your prewritten post. The post includes your plan link.</p>
           <div className="image-dialog__actions"><a href={planImage} download="my-sf-tech-week-plan.png"><Download size={15} /> Download PNG</a><a href={xUrl} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">𝕏</span> Post on X <ArrowRight size={14} /></a></div>
         </div>
       </div>}

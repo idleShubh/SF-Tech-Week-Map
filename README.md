@@ -15,7 +15,7 @@ The default view shows the handpicked 50 to keep the map readable. Switch to **A
 
 ## Share flow
 
-Visitors save events with the bookmark button, then open **My plan**. The plan is kept in local storage. **Post on X** opens an X composer with a prewritten list of up to five selected events and a link to the complete plan. Anyone opening that link sees the same saved selection. **Preview & save your plan image** creates a 1200 × 630 PNG with the selected events and Alan logo for optional manual attachment. X's Web Intent does not attach locally generated images to a post.
+Visitors save events with the bookmark button, then open **My plan**. The plan is kept in local storage. **Post on X** first opens a preview of their 1200 × 630 plan image with the selected events and Alan logo. They can download the PNG, then continue to an X composer with a prewritten list of up to five selected events and a link to the complete plan. Anyone opening that link sees the same saved selection. The image must be attached manually in X because Web Intent cannot attach a locally generated file.
 
 On Vercel, shared `/p/:ids` URLs run through `api/plan.js` to add personalized X and Open Graph metadata to the normal app page. `api/og.js` generates the matching PNG with selected events and “Built with Alan AI.” The homepage uses the generic monochrome image in `public/social-card.png`. Public link previews require the site to be deployed and reachable by X. While running locally, plan links point to localhost and are only useful on the same computer.
 
