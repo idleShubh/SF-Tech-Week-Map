@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
 Allow: /api/og
+
+Sitemap: https://sf-tech-week-map.vercel.app/sitemap.xml

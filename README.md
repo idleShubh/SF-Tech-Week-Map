@@ -15,13 +15,13 @@ The default view shows the handpicked 50 to keep the map readable. Switch to **A
 
 ## Share flow
 
-Visitors save events with the bookmark button, then open **My plan**. The plan is kept in local storage. **Post on X** opens an X composer with a prewritten list of up to five selected events and a link to the complete plan. Anyone opening that link sees the same saved selection. **Preview & save your plan image** creates a 1200 × 675 PNG with the selected events and Alan logo for optional manual attachment. X's Web Intent does not attach locally generated images to a post.
+Visitors save events with the bookmark button, then open **My plan**. The plan is kept in local storage. **Post on X** opens an X composer with a prewritten list of up to five selected events and a link to the complete plan. Anyone opening that link sees the same saved selection. **Preview & save your plan image** creates a 1200 × 630 PNG with the selected events and Alan logo for optional manual attachment. X's Web Intent does not attach locally generated images to a post.
 
 On Vercel, shared `/p/:ids` URLs run through `api/plan.js` to add personalized X and Open Graph metadata to the normal app page. `api/og.js` generates the matching PNG with selected events and “Built with Alan AI.” The homepage uses the generic monochrome image in `public/social-card.png`. Public link previews require the site to be deployed and reachable by X. While running locally, plan links point to localhost and are only useful on the same computer.
 
 ## Deploy to Vercel
 
-Import this folder as a Vite project. Vercel should use `npm run build` and output directory `dist`; `vercel.json` adds the personalized plan route. Point `sftechweekmap.com` at the deployment before sharing public posts. If the final domain changes, set `VITE_PUBLIC_SITE_URL` during the build and update the homepage social image URL in `index.html`.
+Import this folder as a Vite project. Vercel should use `npm run build` and output directory `dist`; `vercel.json` adds the personalized plan route. The current public URL is `https://sf-tech-week-map.vercel.app/`, which the homepage social image and SEO metadata use while `sftechweekmap.com` has no DNS record. Once the custom domain is connected, update the homepage canonical/Open Graph URLs in `index.html`, the sitemap URLs in `public/`, and set `VITE_PUBLIC_SITE_URL=https://sftechweekmap.com` for plan links.
 
 ## Data notes
 
